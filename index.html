@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Scavenger Escape Rooms Budapest - Escape Game</title>
+    <base href="https://www.scavengerescape.com"> <!-- TODO: delete -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,400i,700,700i&display=swap&subset=latin-ext"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/out/css/app.css">
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="16x16">
+    <meta name="description"
+        content="Escape game players from Budapest, Hungary are welcome to Scavenger Escape Rooms to play an exciting escape game or treasure hunt experience.">
+    <meta name="keywords"
+        content="escape room Budapest , escape game Budapest, treasure hunt Budapest, scavenger hunt Budapest, Budapest escape room game, Scavenger Escape">
+
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-K2PG582');</script>
+    <!-- End Google Tag Manager -->
+    <style type="text/css">
+        .login-puzzle--container {
+            background: linear-gradient(180deg, rgba(0,50,97,1) 0%, rgba(0,86,166,1) 100vh);
+            padding-top: 100vh;
+            height: 200vh;
+        }
+        .login-puzzle--attempt-count {
+            background-color: #00d2ff;
+            color: #0056a6;
+        }
+        .login-puzzle--options {
+            --gap: 1rem;
+            gap: var(--gap);
+        }
+        .login-puzzle--options__option {
+            flex: 0 0 calc(33.33333333% - var(--gap));
+            aspect-ratio: 3 / 4;
+        }
+        .login-puzzle--options__option label {
+            background-color: #0056a6;
+            border: 2px solid #00d2ff;
+            display: block;
+            height: 100%;
+            width: 100%;
+        }
+        .login-puzzle--options__option input:checked + label {
+            background-color: #00d2ff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K2PG582" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <main class="main">
+
+
+        <nav class="container navbar navbar-expand-lg navbar-light bg-light" id="nav-menu">
+            <a href="/" class="navbar-brand">
+                <img src="/out/img/scavenger_logo.gif" alt="" srcset="" width="147" height="95">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto uppercase">
+                    <li class="nav-item">
+                        <a href="/en/budapest#gallery" class="pl-4 "">Gallery</a>
+        </li>
+        <li class=" nav-item">
+                            <a href="/en/budapest#rooms" class="pl-4 "">Rooms</a>
+        </li>
+        <li class=" nav-item">
+                                <a href="/en/budapest/booking" class="pl-4 "">Booking</a>
+        </li>
+                    <li class=" nav-item">
+                                    <a href="/en/budapest/offers/giftcard" class="pl-4 "">Giftcard</a>
+            </li>
+                
+        <li class=" nav-item">
+                                        <a href="/en/budapest/blog" class="pl-4 "">Blog</a>
+        </li>
+        <li class=" nav-item">
+                                            <a href="/en/budapest#contact" class="pl-4 "">Contact</a>
+        </li>
+        <li class=" nav-item">
+                                                <div class="dropdown inline-block relative ml-4">
+                                                    <button>
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu absolute hidden ">
+                                                        <li class=""><a href="/hu/budapest"><span
+                                                                    class="flag-icon flag-icon-hu"></span></a></li>
+                                                    </ul>
+                                                </div>
+                    </li>
+            </div>
+        </nav>
+
+
+
+
+
+        <div id="game-page">
+            <div class="container login-puzzle--container flex justify-center flex-col" id="login-puzzle">
+                <template v-if="!solved">
+                    <div class="row justify-center">
+                        <div class="col-md-12">
+                            <p class="text-center font-mono text-white text-lg py-8">
+                                Welcome, agent!
+                            </p>
+                            </div>
+                        </div>
+                        <div class="row justify-center">
+                            <div class="col-md-12 px-8 py-6">
+                                <div class="login-puzzle--attempt-count font-mono text-center text-lg h-16 p-1 items-center justify-center flex">
+                                    <span>
+                                        LOGIN&nbsp;-&nbsp;<span class="js-attempt-count">{{ 6 - selectedList.length }}</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row justify-center">
+                            <div class="col-md-12 px-8 py-6">
+                                <form class="login-puzzle--options p-1 items-center justify-between flex flex-wrap row-cols-3 js-login-puzzle-form" v-on:change="formChange">
+                                    <div class="login-puzzle--options__option" v-for="n in 6">
+                                        <input v-bind:id="'login-puzzle-option-' + n" v-on:change="selectOption" v-bind:disabled="selectedList.includes(n)" type="checkbox" name="login-puzzle-option" v-bind:value="n" class="sr-only">
+                                        <label v-bind:for="'login-puzzle-option-' + n"></label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="row justify-center">
+                            <div class="col-md-12">
+                                <p class="font-mono text-white text-center text-md underline">
+                                    Forgotten password?
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <template v-else>
+                    Solved!
+                </template>
+            </div>
+        </div>
+
+    </main>
+    <!-- base js -->
+    <script src="https://www.scavengerescape.com/out/js/app.js"></script>
+    <script>
+        const solution = [1, 2, 3, 4, 5, 6]; 
+        const app = new Vue({
+            el: '#login-puzzle',
+            data: {
+                selectedList: [],
+                solved: false,
+                failed: false,
+            },
+            methods: {
+                selectOption: function (e) {
+                    const selectedList = [...this.selectedList, +e.target.value];
+                    if (this.selectedList.length < 6) {
+                        this.selectedList = selectedList;
+                    }
+                },
+                formChange: function (e) {
+                    if (this.selectedList.length < 6) {
+                        return;
+                    }
+                    if (solution.every((value, index) => this.selectedList[index] === value)) {
+                        setTimeout(() => {
+                            this.solved = true;
+                        }, 500);
+                    } else {
+                        const form = e.target;
+                        setTimeout(() => {
+                            this.failed = true;
+                            form.reset();
+                            this.selectedList = [];
+                        }, 500);
+                    }
+                },
+            },
+        });
+    </script>
+</body>
+
+</html>
