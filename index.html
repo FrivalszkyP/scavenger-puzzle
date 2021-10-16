@@ -104,8 +104,8 @@
                                         <div class="login-puzzle--options__option" v-for="n in 6">
                                             <input v-bind:id="'login-puzzle-option-' + n" v-on:change="selectOption" v-bind:disabled="selectedList.includes(n)" type="checkbox" name="login-puzzle-option" v-bind:value="n" class="sr-only">
                                             <label v-bind:for="'login-puzzle-option-' + n" class="transition-colors duration-500">
-                                                <img width="106" height="150" class="login--puzzle-piece-off" v-bind:src="'https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/button' + n + '_off.png'" v-bind:alt="'puzzle piece #' + n">
-                                                <img width="106" height="150" class="login--puzzle-piece-on" v-bind:src="'https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/button' + n + '_on.png'" v-bind:alt="'puzzle piece #' + n">
+                                                <img width="106" height="150" class="login--puzzle-piece-off w-full" v-bind:src="'https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/button' + n + '_off.png'" v-bind:alt="'puzzle piece #' + n">
+                                                <img width="106" height="150" class="login--puzzle-piece-on w-full" v-bind:src="'https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/button' + n + '_on.png'" v-bind:alt="'puzzle piece #' + n">
                                             </label>
                                         </div>
                                     </form>
