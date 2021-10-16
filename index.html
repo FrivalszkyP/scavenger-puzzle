@@ -9,6 +9,10 @@
     <title>Scavenger Escape Rooms Budapest - Escape Game</title>
     <base href="https://www.scavengerescape.com"> <!-- TODO: delete this line -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,400i,700,700i&display=swap&subset=latin-ext" rel="stylesheet">
+    <link href="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/US_logo.png" rel="preload" as="image">
+    <link href="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/scroll.png" rel="preload" as="image">
+    <link href="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/US_solution.png" rel="preload" as="image">
+    <link href="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/US_logo2.png" rel="preload" as="image">
     <link rel="stylesheet" href="/out/css/app.css">
     <link rel="icon" href="/favicon.png" type="image/png" sizes="16x16">
     <style type="text/css">
@@ -21,6 +25,9 @@
         }
         .login-puzzle--body {
             height: calc(100vh - 50px);
+        }
+        .login-puzzle--solved-container {
+            min-height: calc(100vh - 50px - 70px);
         }
         .login-puzzle--footer .row {
             background-color: #002142;
@@ -41,11 +48,11 @@
         .login-puzzle--options__option input:checked + label .login--puzzle-piece-off {
             display: none;
         }
-        .fade-enter {
+        .fadein-enter {
             opacity: 0;
         }
-        .login-puzzle--solved-container {
-            background-color: #0056a6;
+        .fadeout-leave-to {
+            opacity: 0;
         }
         .login-puzzle--solved-container img {
             display: inline-block;
@@ -69,49 +76,60 @@
         </nav>
 
         <div id="game-page">
-            <div class="container login-puzzle--container relative flex justify-center flex-col" id="login-puzzle">
-                <div class="justify-center flex flex-col items-center login-puzzle--header">
-                    <img src="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/US_logo.png" alt="" width="385" height="272" class="mb-16">
-                    <img src="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/scroll.png" alt="" width="38" height="44">
-                </div>
-                <div class="login-puzzle--body flex flex-col justify-center">
-                    <div class="row justify-center flex-shrink-0">
-                        <div class="col-12 px-8 mb-4">
-                            <div class="login-puzzle--attempt-count font-mono text-center text-md p-2 items-center justify-center flex gap-2">
-                                <span class="login-puzzle--square"></span>
-                                <span class="login-puzzle--square"></span>
-                                <span class="flex-grow-1">
-                                    LOGIN&nbsp;-&nbsp;<span class="js-attempt-count">{{ 6 - selectedList.length }}</span>
-                                </span>
-                                <span class="login-puzzle--square"></span>
-                                <span class="login-puzzle--square"></span>
-                            </div>
+            <div class="relative flex justify-center flex-col" id="login-puzzle">
+                <transition name="fadeout">
+                    <div class="login-puzzle--container container transition-opacity duration-500 opacity-100" v-show="!solved">
+                        <div class="justify-center flex flex-col items-center login-puzzle--header">
+                            <img src="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/US_logo.png" alt="" width="385" height="272" class="mb-16">
+                            <img src="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/scroll.png" alt="" width="38" height="44">
                         </div>
-                    </div>
-
-                    <div class="row justify-center flex-shrink-0">
-                        <div class="col-12 px-8">
-                            <form class="gap-3 grid grid-cols-3 grid-rows-2 login-puzzle--options p-1" v-on:change="formChange">
-                                <div class="login-puzzle--options__option" v-for="n in 6">
-                                    <input v-bind:id="'login-puzzle-option-' + n" v-on:change="selectOption" v-bind:disabled="selectedList.includes(n)" type="checkbox" name="login-puzzle-option" v-bind:value="n" class="sr-only">
-                                    <label v-bind:for="'login-puzzle-option-' + n" class="transition-colors duration-500">
-                                        <img width="106" height="150" class="login--puzzle-piece-off" v-bind:src="'https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/button' + n + '_off.png'" v-bind:alt="'puzzle piece #' + n">
-                                        <img width="106" height="150" class="login--puzzle-piece-on" v-bind:src="'https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/button' + n + '_on.png'" v-bind:alt="'puzzle piece #' + n">
-                                    </label>
+                        <div class="login-puzzle--body flex flex-col justify-center">
+                            <div class="row justify-center flex-shrink-0">
+                                <div class="col-12 px-8 mb-4">
+                                    <div class="login-puzzle--attempt-count font-mono text-center text-md p-2 items-center justify-center flex gap-2">
+                                        <span class="login-puzzle--square"></span>
+                                        <span class="login-puzzle--square"></span>
+                                        <span class="flex-grow-1">
+                                            LOGIN&nbsp;-&nbsp;<span class="js-attempt-count">{{ 6 - selectedList.length }}</span>
+                                        </span>
+                                        <span class="login-puzzle--square"></span>
+                                        <span class="login-puzzle--square"></span>
+                                    </div>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
+                            </div>
 
-                    <transition name="fade">
-                        <div class="login-puzzle--solved-container row justify-center transition-opacity duration-500 opacity-100 absolute bottom-0 w-full" v-if="solved">
-                            <div class="col-12 text-center">
-                                <img src="https://frivalszkyp.github.io/scavenger-puzzle/UnicornSystems_website_page2.jpeg">
+                            <div class="row justify-center flex-shrink-0">
+                                <div class="col-12 px-8">
+                                    <form class="gap-3 grid grid-cols-3 grid-rows-2 login-puzzle--options p-1" v-on:change="formChange">
+                                        <div class="login-puzzle--options__option" v-for="n in 6">
+                                            <input v-bind:id="'login-puzzle-option-' + n" v-on:change="selectOption" v-bind:disabled="selectedList.includes(n)" type="checkbox" name="login-puzzle-option" v-bind:value="n" class="sr-only">
+                                            <label v-bind:for="'login-puzzle-option-' + n" class="transition-colors duration-500">
+                                                <img width="106" height="150" class="login--puzzle-piece-off" v-bind:src="'https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/button' + n + '_off.png'" v-bind:alt="'puzzle piece #' + n">
+                                                <img width="106" height="150" class="login--puzzle-piece-on" v-bind:src="'https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/button' + n + '_on.png'" v-bind:alt="'puzzle piece #' + n">
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </transition>
-                </div>
-                <div class="login-puzzle--footer">
+                    </div>
+                </transition>
+
+                <transition name="fadein">
+                    <div class="login-puzzle--solved-container container transition-opacity duration-500 opacity-100 absolute bottom-0 w-full" v-if="solved">
+                        <div class="row">
+                            <div class="col-12 pt-8 pb-24 text-center">
+                                <div class="py-2">
+                                    <img src="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/US_logo2.png">
+                                </div>
+                                <div class="py-2">
+                                    <img width="100%" src="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/US_solution.png">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </transition>
+                <div class="login-puzzle--footer container">
                     <div class="row">
                         <div class="col-12 py-2 text-center">
                             &copy; 2021 Scavenger Escape | All rights reserved
@@ -175,6 +193,7 @@
                     }
                     if (solution.every((value, index) => this.selectedList[index] === value)) {
                         this.solved = true;
+                        window.scrollTo({ behavior: 'smooth', top: 0 })
                     } else {
                         const form = e.currentTarget;
                         setTimeout(() => {
