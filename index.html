@@ -5,55 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="robots" content="noindex" /> <!-- this puzzle is not indexed by Google -->
     <title>Scavenger Escape Rooms Budapest - Escape Game</title>
-    <base href="https://www.scavengerescape.com"> <!-- TODO: delete -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,400i,700,700i&display=swap&subset=latin-ext"
-        rel="stylesheet">
+    <base href="https://www.scavengerescape.com"> <!-- TODO: delete this line -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,400i,700,700i&display=swap&subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="/out/css/app.css">
     <link rel="icon" href="/favicon.png" type="image/png" sizes="16x16">
-    <meta name="description"
-        content="Escape game players from Budapest, Hungary are welcome to Scavenger Escape Rooms to play an exciting escape game or treasure hunt experience.">
-    <meta name="keywords"
-        content="escape room Budapest , escape game Budapest, treasure hunt Budapest, scavenger hunt Budapest, Budapest escape room game, Scavenger Escape">
-
-    <!-- Google Tag Manager -->
-    <script>(function (w, d, s, l, i) {
-            w[l] = w[l] || []; w[l].push({
-                'gtm.start':
-                    new Date().getTime(), event: 'gtm.js'
-            }); var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-K2PG582');</script>
-    <!-- End Google Tag Manager -->
     <style type="text/css">
         .login-puzzle--container {
-            background: linear-gradient(180deg, rgba(0,50,97,1) 0%, rgba(0,86,166,1) 100vh);
-            padding-top: 100vh;
-            height: 200%;
-            min-height: 200vh;
+            background: #0056a6
+            linear-gradient(180deg, rgba(0,0,0,0.42) 0%, rgba(255,255,255,0) 100vh);
+        }
+        .login-puzzle--header {
+            height: calc(100vh - 70px);
+        }
+        .login-puzzle--body {
+            height: calc(100vh - 50px);
+        }
+        .login-puzzle--footer .row {
+            background-color: #002142;
+            color: #005cb5;
+            font-size: 12px;
+            height: 50px;
         }
         .login-puzzle--attempt-count {
             background-color: #00d2ff;
             color: #0056a6;
         }
-        .login-puzzle--options {
-            --gap: 1rem;
-            gap: var(--gap);
-        }
-        .login-puzzle--options__option {
-            flex: 0 0 calc(33.33333333% - var(--gap));
-            aspect-ratio: 3 / 4;
-        }
         .login-puzzle--options__option label {
-            background-color: #0056a6;
-            border: 2px solid #00d2ff;
             display: block;
-            height: 100%;
-            width: 100%;
         }
-        .login-puzzle--options__option input:checked + label {
-            background-color: #00d2ff;
+        .login-puzzle--options__option input:not(:checked) + label .login--puzzle-piece-on {
+            display: none;
+        }
+        .login-puzzle--options__option input:checked + label .login--puzzle-piece-off {
+            display: none;
         }
         .fade-enter {
             opacity: 0;
@@ -64,110 +50,73 @@
         .login-puzzle--solved-container img {
             display: inline-block;
         }
+        .login-puzzle--square {
+            background-color: #00d2ff;
+            border: 2px solid #0056a6;
+            display: inline-block;
+            width: 33px;
+            height: 40px;
+        }
     </style>
 </head>
 
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K2PG582" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
     <main class="main">
-
-
-        <nav class="container navbar navbar-expand-lg navbar-light bg-light" id="nav-menu">
+        <nav class="container navbar navbar-expand-lg navbar-light bg-light px-0 py-0" id="nav-menu">
             <a href="/" class="navbar-brand">
-                <img src="/out/img/scavenger_logo.gif" alt="" srcset="" width="147" height="95">
+                <img src="/out/img/scavenger_logo.gif" alt="" width="100">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto uppercase">
-                    <li class="nav-item">
-                        <a href="/en/budapest#gallery" class="pl-4 "">Gallery</a>
-        </li>
-        <li class=" nav-item">
-                            <a href="/en/budapest#rooms" class="pl-4 "">Rooms</a>
-        </li>
-        <li class=" nav-item">
-                                <a href="/en/budapest/booking" class="pl-4 "">Booking</a>
-        </li>
-                    <li class=" nav-item">
-                                    <a href="/en/budapest/offers/giftcard" class="pl-4 "">Giftcard</a>
-            </li>
-
-        <li class=" nav-item">
-                                        <a href="/en/budapest/blog" class="pl-4 "">Blog</a>
-        </li>
-        <li class=" nav-item">
-                                            <a href="/en/budapest#contact" class="pl-4 "">Contact</a>
-        </li>
-        <li class=" nav-item">
-                                                <div class="dropdown inline-block relative ml-4">
-                                                    <button>
-                                                        <span class="flag-icon flag-icon-gb"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu absolute hidden ">
-                                                        <li class=""><a href="/hu/budapest"><span
-                                                                    class="flag-icon flag-icon-hu"></span></a></li>
-                                                    </ul>
-                                                </div>
-                    </li>
-            </div>
         </nav>
-
-
-
-
 
         <div id="game-page">
             <div class="container login-puzzle--container relative flex justify-center flex-col" id="login-puzzle">
-                <div class="row justify-center">
-                    <div class="col-md-12">
-                        <p class="text-center font-mono text-white text-lg py-8">
-                            Welcome, agent!
-                        </p>
-                        </div>
-                    </div>
-                    <div class="row justify-center">
-                        <div class="col-md-12 px-8 py-6">
-                            <div class="login-puzzle--attempt-count font-mono text-center text-lg h-16 p-1 items-center justify-center flex">
-                                <span>
+                <div class="justify-center flex flex-col items-center login-puzzle--header">
+                    <img src="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/US_logo.png" alt="" width="385" height="272" class="mb-16">
+                    <img src="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/scroll.png" alt="" width="38" height="44">
+                </div>
+                <div class="login-puzzle--body flex flex-col justify-center">
+                    <div class="row justify-center flex-shrink-0">
+                        <div class="col-12 px-8 mb-4">
+                            <div class="login-puzzle--attempt-count font-mono text-center text-md p-2 items-center justify-center flex gap-2">
+                                <span class="login-puzzle--square"></span>
+                                <span class="login-puzzle--square"></span>
+                                <span class="flex-grow-1">
                                     LOGIN&nbsp;-&nbsp;<span class="js-attempt-count">{{ 6 - selectedList.length }}</span>
                                 </span>
+                                <span class="login-puzzle--square"></span>
+                                <span class="login-puzzle--square"></span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row justify-center">
-                        <div class="col-md-12 px-8 py-6">
-                            <form class="login-puzzle--options p-1 items-center justify-between flex flex-wrap row-cols-3 js-login-puzzle-form" v-on:change="formChange">
+                    <div class="row justify-center flex-shrink-0">
+                        <div class="col-12 px-8">
+                            <form class="gap-3 grid grid-cols-3 grid-rows-2 login-puzzle--options p-1" v-on:change="formChange">
                                 <div class="login-puzzle--options__option" v-for="n in 6">
                                     <input v-bind:id="'login-puzzle-option-' + n" v-on:change="selectOption" v-bind:disabled="selectedList.includes(n)" type="checkbox" name="login-puzzle-option" v-bind:value="n" class="sr-only">
-                                    <label v-bind:for="'login-puzzle-option-' + n" class="transition-colors duration-500"></label>
+                                    <label v-bind:for="'login-puzzle-option-' + n" class="transition-colors duration-500">
+                                        <img width="106" height="150" class="login--puzzle-piece-off" v-bind:src="'https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/button' + n + '_off.png'" v-bind:alt="'puzzle piece #' + n">
+                                        <img width="106" height="150" class="login--puzzle-piece-on" v-bind:src="'https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/button' + n + '_on.png'" v-bind:alt="'puzzle piece #' + n">
+                                    </label>
                                 </div>
                             </form>
                         </div>
                     </div>
 
-                    <div class="row justify-center">
-                        <div class="col-md-12">
-                            <p class="font-mono text-white text-center text-md underline py-8">
-                                Forgotten password?
-                            </p>
-                        </div>
-                    </div>
                     <transition name="fade">
                         <div class="login-puzzle--solved-container row justify-center transition-opacity duration-500 opacity-100 absolute bottom-0 w-full" v-if="solved">
-                            <div class="col-md-12 text-center">
+                            <div class="col-12 text-center">
                                 <img src="https://frivalszkyp.github.io/scavenger-puzzle/UnicornSystems_website_page2.jpeg">
                             </div>
                         </div>
                     </transition>
+                </div>
+                <div class="login-puzzle--footer">
+                    <div class="row">
+                        <div class="col-12 py-2 text-center">
+                            &copy; 2021 Scavenger Escape | All rights reserved
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -176,6 +125,9 @@
     <!-- base js -->
     <script src="https://www.scavengerescape.com/out/js/app.js"></script>
     <script>
+        /********************************************************
+         * @see https://github.com/FrivalszkyP/scavenger-puzzle *
+         ********************************************************/
         /**
          * Order of the correct solution
          * TODO: CHANGE THIS TO THE CORRECT SOLUTION
