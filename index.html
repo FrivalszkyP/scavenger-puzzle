@@ -99,7 +99,7 @@
                     <li class=" nav-item">
                                     <a href="/en/budapest/offers/giftcard" class="pl-4 "">Giftcard</a>
             </li>
-                
+
         <li class=" nav-item">
                                         <a href="/en/budapest/blog" class="pl-4 "">Blog</a>
         </li>
@@ -176,7 +176,17 @@
     <!-- base js -->
     <script src="https://www.scavengerescape.com/out/js/app.js"></script>
     <script>
-        const solution = [1, 2, 3, 4, 5, 6]; 
+        /**
+         * Order of the correct solution
+         * TODO: CHANGE THIS TO THE CORRECT SOLUTION
+         * @var {array}
+         */
+        const solution = [1, 2, 3, 4, 5, 6];
+        /**
+         * VueJS app that handles the puzzle game
+         * Each puzzle piece is actually a hidden checkbox.
+         * The user clicks the images which are inside <label> elements that change the state of the checkboxes.
+         */
         const app = new Vue({
             el: '#login-puzzle',
             data: {
@@ -185,13 +195,29 @@
                 failed: false,
             },
             methods: {
+                /**
+                 * Checkbox change event handler
+                 * When a user clicks a puzzle piece, it ticks a checkbox.
+                 * The value of the checkbox element is added to the `selectedList` property.
+                 * If a value is added to the selectedList, that checkbox becomes disabled (see v-bind:disabled).
+                 * This way, it cannot be unchecked until the form resets.
+                 */
                 selectOption: function (e) {
                     const selectedList = [...this.selectedList, +e.target.value];
                     if (this.selectedList.length < 6) {
                         this.selectedList = selectedList;
                     }
                 },
+                /**
+                 * Form change event handler
+                 * When every checkbox is checked, we check if the solution is correct.
+                 * We compare the order of the entries in the `selectedList` array to the `solution` array.
+                 * If the solution is correct the VueJS app transforms into the "solved" state.
+                 * If the solution is incorrect the form resets after 0.5 seconds.
+                 * The small time delay helps the user to perceive what happens.
+                 */
                 formChange: function (e) {
+                    //
                     if (this.selectedList.length < 6) {
                         return;
                     }
