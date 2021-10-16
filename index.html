@@ -21,10 +21,10 @@
             linear-gradient(180deg, rgba(0,0,0,0.42) 0%, rgba(255,255,255,0) 100vh);
         }
         .login-puzzle--header {
-            height: calc(100vh - 70px);
+            min-height: calc(100vh - 70px);
         }
         .login-puzzle--body {
-            height: calc(100vh - 50px);
+            min-height: calc(100vh - 50px);
         }
         .login-puzzle--solved-container {
             min-height: calc(100vh - 50px - 70px);
@@ -78,7 +78,7 @@
         <div id="game-page">
             <div class="relative flex justify-center flex-col" id="login-puzzle">
                 <transition name="fadeout">
-                    <div class="login-puzzle--container container transition-opacity duration-500 opacity-100" v-show="!solved">
+                    <div class="login-puzzle--container container pb-4 transition-opacity duration-500 opacity-100" v-show="!solved">
                         <div class="justify-center flex flex-col items-center login-puzzle--header">
                             <img src="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/US_logo.png" alt="" width="385" height="272" class="mb-16">
                             <img src="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/scroll.png" alt="" width="38" height="44">
