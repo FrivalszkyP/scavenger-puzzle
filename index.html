@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="robots" content="noindex" /> <!-- this puzzle is not indexed by Google -->
     <title>Scavenger Escape Rooms Budapest - Escape Game</title>
@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,400i,700,700i&display=swap&subset=latin-ext" rel="stylesheet">
     <link href="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/US_logo.png" rel="preload" as="image">
     <link href="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/scroll.png" rel="preload" as="image">
-    <link href="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/US_solution.png" rel="preload" as="image">
+    <link href="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/US_Solution.jpg" rel="preload" as="image">
     <link href="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/US_logo2.png" rel="preload" as="image">
     <link rel="stylesheet" href="/out/css/app.css">
     <link rel="icon" href="/favicon.png" type="image/png" sizes="16x16">
@@ -101,7 +101,7 @@
                             <div class="row justify-center flex-shrink-0">
                                 <div class="col-12 px-8">
                                     <form class="gap-3 grid grid-cols-3 grid-rows-2 login-puzzle--options p-1" v-on:change="formChange">
-                                        <div class="login-puzzle--options__option" v-for="n in 6">
+                                        <div class="login-puzzle--options__option" v-for="n in imageOrder">
                                             <input v-bind:id="'login-puzzle-option-' + n" v-on:change="selectOption" v-bind:disabled="selectedList.includes(n)" type="checkbox" name="login-puzzle-option" v-bind:value="n" class="sr-only">
                                             <label v-bind:for="'login-puzzle-option-' + n" class="transition-colors duration-500">
                                                 <img width="106" height="150" class="login--puzzle-piece-off w-full" v-bind:src="'https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/button' + n + '_off.png'" v-bind:alt="'puzzle piece #' + n">
@@ -123,7 +123,7 @@
                                     <img src="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/US_logo2.png">
                                 </div>
                                 <div class="py-2">
-                                    <img width="100%" src="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/US_solution.png">
+                                    <img width="100%" src="https://frivalszkyp.github.io/scavenger-puzzle/out/img/puzzle/US_Solution.jpg">
                                 </div>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
          ********************************************************/
         /**
          * Order of the correct solution
-         * TODO: CHANGE THIS TO THE CORRECT SOLUTION
+         * CHANGE THIS TO REARRANGE THE CORRECT SOLUTION
          * @var {array}
          */
         const solution = [1, 2, 3, 4, 5, 6];
@@ -160,6 +160,11 @@
         const app = new Vue({
             el: '#login-puzzle',
             data: {
+                /**
+                 * Order of the images they are displayed in
+                 * CHANGE THIS TO REARRANGE THE ORDER IN WHICH THE IMAGES ARE DISPLAYED
+                 */
+                imageOrder: [5, 3, 6, 1, 4, 2],
                 selectedList: [],
                 solved: false,
                 failed: false,

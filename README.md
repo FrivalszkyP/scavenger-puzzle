@@ -4,12 +4,12 @@
 
 The JS code is not in a separate file but at the bottom of the HTML code.
 
-To change the order of the correct solution, look for this line:
+To change the order of the correct solution (in which the images have to be clicked), look for this line:
 
 ```js
         /**
          * Order of the correct solution
-         * TODO: CHANGE THIS TO THE CORRECT SOLUTION
+         * CHANGE THIS TO REARRANGE THE CORRECT SOLUTION
          * @var {array}
          */
         const solution = [1, 2, 3, 4, 5, 6];
@@ -21,7 +21,23 @@ Change the value of the solution array. You can set up a different solution like
         const solution = [3, 4, 2, 5, 1, 6];
 ```
 
+Note that the numbers in this array **correspond to the number in the image file name**.
 
+You can also change the order in which the images are displayed in.
+
+Look for this line:
+
+```js
+                /**
+                 * Order of the images they are displayed in
+                 * CHANGE THIS TO REARRANGE THE ORDER IN WHICH THE IMAGES ARE DISPLAYED
+                 */
+                imageOrder: [5, 3, 6, 1, 4, 2],
+```
+
+These numbers **also correspond to the number in the image file names**.
+
+Changing this affects the order in which the images are displayed in.
 
 ## Used technology
 
